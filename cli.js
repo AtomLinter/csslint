@@ -253,22 +253,25 @@ function cli(api){
                     api.print(output);
                 }
 
-
-                files.forEach(function(file){
-                    if (exitCode === 0) {
-                        exitCode = processFile(file,options);
-                    } else {
-                        processFile(file,options);
+                return files.reduce(function(promise, file){
+                    return promise.then(function(){
+                        if (exitCode === 0) {
+                            exitCode = processFile(file,options);
+                        } else {
+                            processFile(file,options);
+                        }
+                    })
+                }, Promise.resolve()).then(function(){
+                    output = formatter.endFormat();
+                    if (output){
+                        api.print(output);
                     }
-                });
+                    return exitCode
+                })
 
-                output = formatter.endFormat();
-                if (output){
-                    api.print(output);
-                }
+
             }
         }
-        return exitCode;
     }
 
 
@@ -357,8 +360,9 @@ function cli(api){
         printRules();
         api.quit(0);
     }
-
-    api.quit(processFiles(options.files,options));
+    Promise.resolve(processFiles(options.files,options)).then(function(exitCode){
+        api.quit(exitCode);
+    });
 }
 
 /*
