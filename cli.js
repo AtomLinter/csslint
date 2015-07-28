@@ -156,9 +156,8 @@ function cli(api){
      * @param {Object} options for processing
      * @return {Number} exit code
      */
-    function processFile(relativeFilePath, options) {
-        var input = api.readFile(relativeFilePath),
-            ruleset = filterRules(options),
+    function processFile(input, relativeFilePath, options) {
+        var ruleset = filterRules(options),
             result = CSSLint.verify(input, gatherRules(options, ruleset)),
             formatter = CSSLint.getFormatter(options.format || "text"),
             messages = result.messages || [],
@@ -254,11 +253,16 @@ function cli(api){
                 }
 
                 return files.reduce(function(promise, file){
-                    return promise.then(function(){
+                    return promise.then(function() {
+                        return api.readFile(file)
+                    }).then(function(contents){
+                        console.log(contents)
                         if (exitCode === 0) {
-                            exitCode = processFile(file,options);
+                            return processFile(contents, file,options).then(function(code){
+                                exitCode = code
+                            })
                         } else {
-                            processFile(file,options);
+                            return processFile(contents, file,options);
                         }
                     })
                 }, Promise.resolve()).then(function(){
@@ -435,6 +439,17 @@ cli({
     },
 
     readFile: function(filename){
+        if(path.basename(filename) === '-'){
+            var deferred = Promise.defer()
+            var data = []
+            process.stdin.on('data', function(chunk){
+                data.push(chunk.toString())
+            })
+            process.stdin.on('end', function(){
+                deferred.resolve(data.join(''))
+            })
+            return deferred.promise
+        }
         try {
             return fs.readFileSync(filename, "utf-8");    
         } catch (ex) {
