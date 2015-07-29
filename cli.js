@@ -256,7 +256,6 @@ function cli(api){
                     return promise.then(function() {
                         return api.readFile(file)
                     }).then(function(contents){
-                        console.log(contents)
                         if (exitCode === 0) {
                             return processFile(contents, file,options).then(function(code){
                                 exitCode = code
