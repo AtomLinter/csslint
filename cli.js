@@ -256,7 +256,6 @@ function cli(api){
                     return promise.then(function() {
                         return api.readFile(file)
                     }).then(function(contents){
-                        console.log(contents)
                         if (exitCode === 0) {
                             return processFile(contents, file,options).then(function(code){
                                 exitCode = code
@@ -379,18 +378,18 @@ function cli(api){
 var fs      = require("fs"),
     path    = require("path"),
     CSSLint = require("./lib/csslint-node").CSSLint;
-    
+
 cli({
     args: process.argv.slice(2),
 
     print: function(message){
         fs.writeSync(1, message + "\n");
     },
-    
+
     quit: function(code){
         process.exit(code || 0);
     },
-    
+
     isDirectory: function(name){
         try {
             return fs.statSync(name).isDirectory();
@@ -413,7 +412,7 @@ cli({
             fs.readdirSync(stack.join("/")).forEach(function(file){
                 var path = stack.concat([file]).join("/"),
                     stat = fs.statSync(path);
-                
+
                 if (file[0] == ".") {
                     return;
                 } else if (stat.isFile() && /\.css$/.test(file)){
@@ -428,12 +427,12 @@ cli({
         traverse(dir, []);
 
         return files;
-    },    
+    },
 
     getWorkingDirectory: function() {
         return process.cwd();
     },
-    
+
     getFullPath: function(filename){
         return path.resolve(process.cwd(), filename);
     },
@@ -451,7 +450,7 @@ cli({
             return deferred.promise
         }
         try {
-            return fs.readFileSync(filename, "utf-8");    
+            return fs.readFileSync(filename, "utf-8");
         } catch (ex) {
             return "";
         }
