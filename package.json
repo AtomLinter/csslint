@@ -1,5 +1,5 @@
 {
-  "name": "csslint",
+  "name": "atomlinter-csslint",
   "version": "0.10.0",
   "description": "CSSLint",
   "author": {
@@ -26,15 +26,15 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/stubbornella/csslint/blob/master/LICENSE"
+      "url": "https://github.com/CSSLint/csslint/blob/master/LICENSE"
     }
   ],
   "bugs": {
-    "url": "https://github.com/stubbornella/csslint/issues"
+    "url": "https://github.com/CSSLint/csslint/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stubbornella/csslint.git"
+    "url": "git+https://github.com/AtomLinter/csslint.git"
   },
   "dependencies": {
     "parserlib": "~0.2.2"
@@ -49,17 +49,6 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-include-replace": "~0.4.0"
   },
-  "_id": "csslint@0.10.0",
-  "dist": {
-    "shasum": "3a6a04e7565c8e9d19beb49767c7ec96e8365805",
-    "tarball": "http://registry.npmjs.org/csslint/-/csslint-0.10.0.tgz"
-  },
-  "_from": "csslint@*",
-  "_npmVersion": "1.2.32",
-  "_npmUser": {
-    "name": "stubbornella",
-    "email": "nicole@stubbornella.org"
-  },
   "maintainers": [
     {
       "name": "nzakas",
@@ -70,8 +59,5 @@
       "email": "nicole@stubbornella.org"
     }
   ],
-  "_shasum": "3a6a04e7565c8e9d19beb49767c7ec96e8365805",
-  "_resolved": "https://registry.npmjs.org/csslint/-/csslint-0.10.0.tgz",
-  "readme": "ERROR: No README data found!",
-  "homepage": "https://github.com/stubbornella/csslint#readme"
+  "homepage": "https://github.com/CSSLint/csslint#readme"
 }
