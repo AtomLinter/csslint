@@ -34,7 +34,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/CSSLint/csslint.git"
+    "url": "git+https://github.com/AtomLinter/csslint.git"
   },
   "dependencies": {
     "parserlib": "~0.2.2"
