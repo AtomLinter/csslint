@@ -1,6 +1,6 @@
 {
   "name": "atomlinter-csslint",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "CSSLint",
   "author": {
     "name": "Nicole Sullivan"
